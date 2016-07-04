@@ -5,8 +5,8 @@
 import UIKit
 
 class BrowserViewController: UIViewController {
-    private var browserView: BrowserView {
-        return view as! BrowserView
+    private var chromeView: ChromeView {
+        return view as! ChromeView
     }
 
     private let browserModel: BrowserModel
@@ -26,15 +26,58 @@ class BrowserViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = BrowserView(frame: UIScreen.main().bounds)
+        let chrome = ChromeView(frame: UIScreen.main().bounds)
+        chrome.translatesAutoresizingMaskIntoConstraints = false
+        self.view = chrome
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        browserView.toolbarView.delegate = toolbarController
+        bindToolbarSelectors()
+        showWebView()
     }
 }
 
+// MARK: Content Management
+extension BrowserViewController {
+    func showWebView() {
+        let webViewController = FirefoxWebViewController(browserModel: browserModel)
+        webViewController.willMove(toParentViewController: self)
+        chromeView.setContent(view: webViewController.view)
+        webViewController.didMove(toParentViewController: self)
+    }
+
+    func showHomeView() {
+        
+    }
+}
+
+// MARK: Selectors
+extension BrowserViewController {
+    private func bindToolbarSelectors() {
+        // Bind bottom toolbar buttons
+        chromeView.toolbar.backButton.addTarget(self, action: #selector(BrowserViewController.tappedBack), for: .touchUpInside)
+        chromeView.toolbar.forwardButton.addTarget(self, action: #selector(BrowserViewController.tappedForward), for: .touchUpInside)
+        chromeView.toolbar.refreshButton.addTarget(self, action: #selector(BrowserViewController.tappedRefresh), for: .touchUpInside)
+        chromeView.toolbar.shareButton.addTarget(self, action: #selector(BrowserViewController.tappedShare), for: .touchUpInside)
+
+        // Bind URL bar toolbar buttons
+        chromeView.urlBar.backButton.addTarget(self, action: #selector(BrowserViewController.tappedBack), for: .touchUpInside)
+        chromeView.urlBar.forwardButton.addTarget(self, action: #selector(BrowserViewController.tappedForward), for: .touchUpInside)
+        chromeView.urlBar.refreshButton.addTarget(self, action: #selector(BrowserViewController.tappedRefresh), for: .touchUpInside)
+        chromeView.urlBar.shareButton.addTarget(self, action: #selector(BrowserViewController.tappedShare), for: .touchUpInside)
+    }
+
+    func tappedBack() { toolbarController.goBack() }
+
+    func tappedForward() { toolbarController.goForward() }
+
+    func tappedRefresh() { toolbarController.refresh() }
+
+    func tappedStop() { toolbarController.stop() }
+
+    func tappedShare() { toolbarController.share() }
+}
 
 
 

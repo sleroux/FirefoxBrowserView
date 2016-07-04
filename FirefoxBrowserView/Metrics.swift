@@ -12,3 +12,9 @@ struct LayoutMetrics {
     static let toolbarHeight: CGFloat = 44
     static let urlFieldHeight: CGFloat = 44
 }
+
+protocol Frameable {
+    var frame: CGRect { get set }
+}
+extension UIView: Frameable {}
+

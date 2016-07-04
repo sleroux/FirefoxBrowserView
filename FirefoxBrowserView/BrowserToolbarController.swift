@@ -4,26 +4,24 @@
 
 import Foundation
 
-class BrowserToolbarController {}
-
-extension BrowserToolbarController: ToolbarDelegate {
-    func tappedBack() {
+struct BrowserToolbarController: ToolbarActions {
+    func goBack() {
 
     }
 
-    func tappedForward() {
+    func goForward() {
 
     }
 
-    func tappedRefresh() {
+    func refresh() {
 
     }
 
-    func tappedStop() {
+    func stop() {
 
     }
 
-    func tappedShare() {
+    func share() {
 
     }
 }

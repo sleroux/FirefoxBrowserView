@@ -4,86 +4,84 @@
 
 import UIKit
 
-@objc protocol ToolbarDelegate: class {
-    func tappedBack()
-    func tappedForward()
-    func tappedRefresh()
-    func tappedStop()
-    func tappedShare()
+protocol ToolbarActions {
+    func goBack()
+    func goForward()
+    func refresh()
+    func stop()
+    func share()
 }
 
 class ToolbarView: UIView {
-    var delegate: ToolbarDelegate? {
-        didSet {
-            unbindActions()
-            bindActions()
-        }
-    }
+    private let buttons: [UIButton]
+    private var layout: Layout
 
-    let backButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back"), for: [])
-        return button
-    }()
-
-    let forwardButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "forward"), for: [])
-        return button
-    }()
-
-    let refreshButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "refresh"), for: [])
-        return button
-    }()
-
-    let shareButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "send"), for: [])
-        return button
-    }()
-
-    private let toolbarLayout: ToolbarLayout<UIButton>
-
-    override init(frame: CGRect) {
-        toolbarLayout = ToolbarLayout(items: [
-            backButton,
-            forwardButton,
-            refreshButton,
-            shareButton
-            ])
+    init(frame: CGRect, buttons: [UIButton]) {
+        self.buttons = buttons
+        self.layout = ToolbarLayout(items: buttons)
         super.init(frame: frame)
-        addButtonViews()
+        buttons.forEach(addSubview)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func addButtonViews() {
-        addSubview(backButton)
-        addSubview(forwardButton)
-        addSubview(refreshButton)
-        addSubview(shareButton)
-    }
-
-    private func unbindActions() {
-        backButton.removeTarget(delegate, action: #selector(ToolbarDelegate.tappedBack), for: .touchUpInside)
-        forwardButton.removeTarget(delegate, action: #selector(ToolbarDelegate.tappedForward), for: .touchUpInside)
-        shareButton.removeTarget(delegate, action: #selector(ToolbarDelegate.tappedShare), for: .touchUpInside)
-        refreshButton.removeTarget(delegate, action: #selector(ToolbarDelegate.tappedRefresh), for: .touchUpInside)
-    }
-
-    private func bindActions() {
-        backButton.addTarget(delegate, action: #selector(ToolbarDelegate.tappedBack), for: .touchUpInside)
-        forwardButton.addTarget(delegate, action: #selector(ToolbarDelegate.tappedForward), for: .touchUpInside)
-        shareButton.addTarget(delegate, action: #selector(ToolbarDelegate.tappedShare), for: .touchUpInside)
-        refreshButton.addTarget(delegate, action: #selector(ToolbarDelegate.tappedRefresh), for: .touchUpInside)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
-        toolbarLayout.layout(in: frame)
+        layout.layout(in: frame)
     }
 }
+
+struct ToolbarLayout<ToolbarItem: UIButton>: Layout {
+    private let items: [ToolbarItem]
+
+    init(items: [ToolbarItem]) {
+        self.items = items
+    }
+
+    mutating func layout(in rect: CGRect) {
+        let itemWidth = floor(rect.width / CGFloat(items.count))
+        let itemHeight = rect.height
+        items.enumerated().forEach { offset, item in
+            let frame = CGRect(x: CGFloat(offset) * itemWidth, y: 0, width: itemWidth, height: itemHeight)
+            item.frame = frame
+        }
+    }
+}
+
+class BrowserToolbarView: ToolbarView {
+    let backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.setImage(UIImage(named: "back"), for: [])
+        return backButton
+    }()
+
+    let forwardButton: UIButton = {
+        let forwardButton = UIButton()
+        forwardButton.setImage(UIImage(named: "forward"), for: [])
+        return forwardButton
+    }()
+
+    let refreshButton: UIButton = {
+        let refreshButton = UIButton()
+        refreshButton.setImage(UIImage(named: "refresh"), for: [])
+        return refreshButton
+    }()
+
+    let shareButton: UIButton = {
+        let shareButton = UIButton()
+        shareButton.setImage(UIImage(named: "send"), for: [])
+        return shareButton
+    }()
+
+    init(frame: CGRect) {
+        super.init(frame: frame, buttons: [backButton, forwardButton, refreshButton, shareButton])
+        backgroundColor = .gray()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+

@@ -3,31 +3,99 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 import UIKit
-
-@objc protocol URLBarDelegate: class {
-
-}
+import pop
 
 class URLBarView: UIView {
-    let backgroundCurve = CurveBackgroundView()
+    private let backgroundCurve: CurveBackgroundView = {
+        let view = CurveBackgroundView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.setImage(UIImage(named: "back"), for: [])
+        return backButton
+    }()
+
+    let forwardButton: UIButton = {
+        let forwardButton = UIButton()
+        forwardButton.setImage(UIImage(named: "forward"), for: [])
+        return forwardButton
+    }()
+
+    let refreshButton: UIButton = {
+        let refreshButton = UIButton()
+        refreshButton.setImage(UIImage(named: "refresh"), for: [])
+        return refreshButton
+    }()
+
+    let shareButton: UIButton = {
+        let shareButton = UIButton()
+        shareButton.setImage(UIImage(named: "send"), for: [])
+        return shareButton
+    }()
+
+    let urlTextField: UILabel = {
+        let textField = UILabel()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "Test"
+//        textField.layer.borderWidth = 1
+//        textField.layer.borderColor = UIColor.gray().cgColor
+        textField.backgroundColor = .purple()
+        textField.isUserInteractionEnabled = true
+        return textField
+    }()
+
+    private lazy var leftToolbar: ToolbarView = ToolbarView(frame: CGRect.zero, buttons: [
+        self.backButton, self.forwardButton, self.refreshButton
+    ])
+
+    private lazy var rightToolbar: ToolbarView = ToolbarView(frame: CGRect.zero, buttons: [
+        self.shareButton
+    ])
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .blue()
         addSubview(backgroundCurve)
+        addSubview(urlTextField)
+
+        urlTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(URLBarView.tappedURLTextField)))
+
+        backgroundCurve.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        backgroundCurve.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        backgroundCurve.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundCurve.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
+        urlTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        urlTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -60).isActive = true
+        urlTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 6).isActive = true
+        urlTextField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 6).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backgroundCurve.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+// MARK: Animators
+extension URLBarView {
+    func tappedURLTextField() {
+        performSelectURLTextFieldAnimation()
+    }
+
+    func performSelectURLTextFieldAnimation() {
+        guard let animation = POPSpringAnimation(propertyNamed: kPOPLayerBounds) else {
+            return
+        }
+        animation.toValue = NSValue(cgRect: CGRect(x: 10, y: 4, width: frame.width - 200, height: 40))
+        animation.springBounciness = 20
+        urlTextField.pop_add(animation, forKey: "size")
     }
 }
 
-class CurveBackgroundView: UIView {
+private class CurveBackgroundView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         let curvePath = UIBezierPath.tabCurvePath(width: rect.width, height: rect.height, direction: .right)
@@ -39,13 +107,13 @@ class CurveBackgroundView: UIView {
     }
 }
 
-enum TabCurveDirection {
+private enum TabCurveDirection {
     case right
     case left
     case both
 }
 
-extension UIBezierPath {
+private extension UIBezierPath {
     static func tabCurvePath(width: CGFloat, height: CGFloat, direction: TabCurveDirection) -> UIBezierPath {
         let x1: CGFloat = 32.84
         let x2: CGFloat = 5.1
