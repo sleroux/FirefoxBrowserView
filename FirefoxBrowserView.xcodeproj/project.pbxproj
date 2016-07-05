@@ -10,9 +10,10 @@
 		E6045D0A1D2AE445007E70CD /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6045D091D2AE445007E70CD /* pop.framework */; };
 		E62CAC331D24529D00C7BC02 /* BrowserToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAC321D24529D00C7BC02 /* BrowserToolbarController.swift */; };
 		E62CAC351D2452BD00C7BC02 /* ChromeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAC341D2452BD00C7BC02 /* ChromeView.swift */; };
-		E62CAC371D2452C400C7BC02 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAC361D2452C400C7BC02 /* ToolbarView.swift */; };
 		E62CAC3D1D24532D00C7BC02 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAC3C1D24532D00C7BC02 /* Metrics.swift */; };
-		E62E02921D2AB91100F29C33 /* URLBarLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62E02911D2AB91100F29C33 /* URLBarLayouts.swift */; };
+		E6722DED1D2C30D3000B2731 /* ToolbarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6722DEC1D2C30D3000B2731 /* ToolbarButtons.swift */; };
+		E6722DEF1D2C3CB8000B2731 /* TabCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6722DEE1D2C3CB8000B2731 /* TabCurve.swift */; };
+		E6722DF11D2C4C3B000B2731 /* URLInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6722DF01D2C4C3B000B2731 /* URLInputField.swift */; };
 		E69DE7D81D2429FA00B9F24B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69DE7D71D2429FA00B9F24B /* AppDelegate.swift */; };
 		E69DE7DA1D2429FA00B9F24B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69DE7D91D2429FA00B9F24B /* BrowserViewController.swift */; };
 		E69DE7DF1D2429FA00B9F24B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E69DE7DE1D2429FA00B9F24B /* Assets.xcassets */; };
@@ -24,7 +25,6 @@
 		E6BD008F1D2459DB00C18A29 /* BrowserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BD008E1D2459DB00C18A29 /* BrowserModel.swift */; };
 		E6DBEE681D259902008E0732 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DBEE671D259902008E0732 /* HomeViewController.swift */; };
 		E6DBEE6A1D259921008E0732 /* FirefoxWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DBEE691D259921008E0732 /* FirefoxWebViewController.swift */; };
-		E6F673DF1D25B6AC006A9F24 /* ChromeLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F673DE1D25B6AC006A9F24 /* ChromeLayouts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +48,10 @@
 		E6045D091D2AE445007E70CD /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = Carthage/Build/iOS/pop.framework; sourceTree = "<group>"; };
 		E62CAC321D24529D00C7BC02 /* BrowserToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserToolbarController.swift; sourceTree = "<group>"; };
 		E62CAC341D2452BD00C7BC02 /* ChromeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromeView.swift; sourceTree = "<group>"; };
-		E62CAC361D2452C400C7BC02 /* ToolbarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		E62CAC3C1D24532D00C7BC02 /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
-		E62E02911D2AB91100F29C33 /* URLBarLayouts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLBarLayouts.swift; sourceTree = "<group>"; };
+		E6722DEC1D2C30D3000B2731 /* ToolbarButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButtons.swift; sourceTree = "<group>"; };
+		E6722DEE1D2C3CB8000B2731 /* TabCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCurve.swift; sourceTree = "<group>"; };
+		E6722DF01D2C4C3B000B2731 /* URLInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLInputField.swift; sourceTree = "<group>"; };
 		E69DE7D41D2429FA00B9F24B /* FirefoxBrowserView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirefoxBrowserView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69DE7D71D2429FA00B9F24B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E69DE7D91D2429FA00B9F24B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		E6BD008E1D2459DB00C18A29 /* BrowserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserModel.swift; sourceTree = "<group>"; };
 		E6DBEE671D259902008E0732 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E6DBEE691D259921008E0732 /* FirefoxWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirefoxWebViewController.swift; sourceTree = "<group>"; };
-		E6F673DE1D25B6AC006A9F24 /* ChromeLayouts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromeLayouts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				E62CAC3C1D24532D00C7BC02 /* Metrics.swift */,
-				E6F673DE1D25B6AC006A9F24 /* ChromeLayouts.swift */,
-				E62E02911D2AB91100F29C33 /* URLBarLayouts.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -119,8 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				E62CAC341D2452BD00C7BC02 /* ChromeView.swift */,
-				E62CAC361D2452C400C7BC02 /* ToolbarView.swift */,
 				E6BD00891D2455BC00C18A29 /* URLBarView.swift */,
+				E6722DF01D2C4C3B000B2731 /* URLInputField.swift */,
+				E6722DEC1D2C30D3000B2731 /* ToolbarButtons.swift */,
+				E6722DEE1D2C3CB8000B2731 /* TabCurve.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -365,16 +365,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E62CAC331D24529D00C7BC02 /* BrowserToolbarController.swift in Sources */,
-				E62CAC371D2452C400C7BC02 /* ToolbarView.swift in Sources */,
 				E6BD008C1D24582700C18A29 /* WebViewCallbackController.swift in Sources */,
 				E6BD008A1D2455BC00C18A29 /* URLBarView.swift in Sources */,
 				E6BD008F1D2459DB00C18A29 /* BrowserModel.swift in Sources */,
+				E6722DED1D2C30D3000B2731 /* ToolbarButtons.swift in Sources */,
+				E6722DEF1D2C3CB8000B2731 /* TabCurve.swift in Sources */,
+				E6722DF11D2C4C3B000B2731 /* URLInputField.swift in Sources */,
 				E6DBEE681D259902008E0732 /* HomeViewController.swift in Sources */,
 				E69DE7DA1D2429FA00B9F24B /* BrowserViewController.swift in Sources */,
 				E69DE7D81D2429FA00B9F24B /* AppDelegate.swift in Sources */,
-				E62E02921D2AB91100F29C33 /* URLBarLayouts.swift in Sources */,
 				E6DBEE6A1D259921008E0732 /* FirefoxWebViewController.swift in Sources */,
-				E6F673DF1D25B6AC006A9F24 /* ChromeLayouts.swift in Sources */,
 				E62CAC351D2452BD00C7BC02 /* ChromeView.swift in Sources */,
 				E62CAC3D1D24532D00C7BC02 /* Metrics.swift in Sources */,
 			);

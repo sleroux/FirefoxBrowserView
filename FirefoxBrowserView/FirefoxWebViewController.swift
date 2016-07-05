@@ -30,7 +30,7 @@ class FirefoxWebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.uiDelegate = webViewCallbackController
-        webView.navigationDelegate = webViewCallbackController
+//        webView.uiDelegate = webViewCallbackController
+//        webView.navigationDelegate = webViewCallbackController
     }
 }

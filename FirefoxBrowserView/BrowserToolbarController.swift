@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct BrowserToolbarController: ToolbarActions {
+struct BrowserToolbarController {
     func goBack() {
 
     }

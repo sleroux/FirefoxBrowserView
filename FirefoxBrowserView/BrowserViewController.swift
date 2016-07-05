@@ -35,6 +35,8 @@ class BrowserViewController: UIViewController {
         super.viewDidLoad()
         bindToolbarSelectors()
         showWebView()
+
+        browserModel.webView.load(URLRequest(url: URL(string: "https://www.mozilla.org")!))
     }
 }
 
@@ -56,10 +58,10 @@ extension BrowserViewController {
 extension BrowserViewController {
     private func bindToolbarSelectors() {
         // Bind bottom toolbar buttons
-        chromeView.toolbar.backButton.addTarget(self, action: #selector(BrowserViewController.tappedBack), for: .touchUpInside)
-        chromeView.toolbar.forwardButton.addTarget(self, action: #selector(BrowserViewController.tappedForward), for: .touchUpInside)
-        chromeView.toolbar.refreshButton.addTarget(self, action: #selector(BrowserViewController.tappedRefresh), for: .touchUpInside)
-        chromeView.toolbar.shareButton.addTarget(self, action: #selector(BrowserViewController.tappedShare), for: .touchUpInside)
+//        chromeView.toolbar.backButton.addTarget(self, action: #selector(BrowserViewController.tappedBack), for: .touchUpInside)
+//        chromeView.toolbar.forwardButton.addTarget(self, action: #selector(BrowserViewController.tappedForward), for: .touchUpInside)
+//        chromeView.toolbar.refreshButton.addTarget(self, action: #selector(BrowserViewController.tappedRefresh), for: .touchUpInside)
+//        chromeView.toolbar.shareButton.addTarget(self, action: #selector(BrowserViewController.tappedShare), for: .touchUpInside)
 
         // Bind URL bar toolbar buttons
         chromeView.urlBar.backButton.addTarget(self, action: #selector(BrowserViewController.tappedBack), for: .touchUpInside)

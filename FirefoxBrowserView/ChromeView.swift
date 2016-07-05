@@ -6,26 +6,43 @@ import UIKit
 
 class ChromeView: UIView {
     private(set) var content: UIView?
-    let toolbar = BrowserToolbarView(frame: .zero)
+    let toolbar: UIStackView = .toolbar(buttons: [
+        .backButton(), .forwardButton(), .refreshButton(), .shareButton()
+    ])
+
     let urlBar = URLBarView()
+
+    private var toolbarBottomConstraint: NSLayoutConstraint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         urlBar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.distribution = .fillEqually
 
         addSubview(toolbar)
         addSubview(urlBar)
 
-        urlBar.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        urlBar.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        urlBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        urlBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        urlBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        urlBar.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         urlBar.heightAnchor.constraint(equalToConstant: LayoutMetrics.urlFieldHeight).isActive = true
 
-        toolbar.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        toolbar.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        toolbar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        toolbarBottomConstraint = toolbar.bottomAnchor.constraint(equalTo: bottomAnchor)
+        toolbarBottomConstraint?.isActive = true
+
+        toolbar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        toolbar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         toolbar.heightAnchor.constraint(equalToConstant: LayoutMetrics.toolbarHeight).isActive = true
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if isWideTraitCollection(traitCollection: traitCollection) {
+            toolbarBottomConstraint?.constant = 44
+        } else {
+            toolbarBottomConstraint?.constant = 0
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,10 +54,12 @@ class ChromeView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
 
-        view.topAnchor.constraint(equalTo: urlBar.bottomAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: toolbar.topAnchor).isActive = true
-        view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        view.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: urlBar.bottomAnchor),
+            view.bottomAnchor.constraint(equalTo: toolbar.topAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
 
         setNeedsLayout()
     }

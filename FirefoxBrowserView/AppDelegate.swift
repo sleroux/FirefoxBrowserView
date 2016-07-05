@@ -12,7 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow()
-        window?.rootViewController = BrowserViewController(browserModel: BrowserModel(webView: WKWebView()))
+        let model = BrowserModel(webView: WKWebView())
+        window?.rootViewController = BrowserViewController(browserModel: model)
         window?.makeKeyAndVisible()
         return true
     }
