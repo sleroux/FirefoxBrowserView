@@ -34,3 +34,23 @@ class FirefoxWebViewController: UIViewController {
 //        webView.navigationDelegate = webViewCallbackController
     }
 }
+
+// MARK: Chrome Action Delegate
+extension FirefoxWebViewController: ChromeActionDelegate {
+
+    func tappedGoBack() {
+
+    }
+
+    func tappedGoForward() {
+
+    }
+
+    func tappedRefresh() {
+
+    }
+
+    func tappedShare() {
+
+    }
+}

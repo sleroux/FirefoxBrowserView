@@ -10,16 +10,6 @@ public func isWideTraitCollection(traitCollection: UITraitCollection) -> Bool {
            (traitCollection.horizontalSizeClass == .regular)
 }
 
-extension UIStackView {
-    static func toolbar(buttons: [ToolbarButton]) -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 8
-        return stackView
-    }
-}
 
 class URLBarView: UIView {
     private let backgroundCurve: CurveBackgroundView = {
@@ -40,16 +30,15 @@ class URLBarView: UIView {
     }()
 
     let tabButton: UIView = {
-        let view = UIView()
+        let view = TabsButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.red()
         return view
     }()
 
     let cancelButton: UIView = {
         let view = UILabel()
         view.text = "Cancel"
-        view.backgroundColor = .green()
+        view.backgroundColor = .green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -67,7 +56,7 @@ class URLBarView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue()
+
         addSubview(backgroundCurve)
         addSubview(cancelButton)
         addSubview(urlTextField)

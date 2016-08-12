@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow()
         let model = BrowserModel(webView: WKWebView())
-        window?.rootViewController = BrowserViewController(browserModel: model)
+        window?.rootViewController = ChromeViewController(browserModel: model)
         window?.makeKeyAndVisible()
         return true
     }

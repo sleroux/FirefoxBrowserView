@@ -5,7 +5,7 @@
 import UIKit
 
 class ToolbarButton: UIButton {
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize: CGSize {
         return CGSize(width: 40, height: 40)
     }
 }

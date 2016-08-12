@@ -16,8 +16,7 @@ class URLInputField: UITextField {
         autocorrectionType = .no
         autocapitalizationType = .none
 
-        layer.borderColor = UIColor.gray().cgColor
-        layer.borderWidth = 1
+        layer.backgroundColor = UIColor.white.cgColor
         layer.cornerRadius = 4
         delegate = self
     }

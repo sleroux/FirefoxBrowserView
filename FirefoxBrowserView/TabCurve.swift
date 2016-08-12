@@ -5,14 +5,27 @@
 import UIKit
 
 class CurveBackgroundView: UIView {
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        let curvePath = UIBezierPath.tabCurvePath(width: rect.width, height: rect.height, direction: .right)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-        context.setFillColor(UIColor.white().cgColor)
-        curvePath.fill()
+    private let curveLayer = CAShapeLayer()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        isOpaque = false
+        let blurFilter = CIFilter(name: "CIGaussianBlur")!
+        blurFilter.setDefaults()
+        curveLayer.fillColor = UIColor(colorLiteralRed: 0.85, green: 0.85, blue: 0.85, alpha: 0.8).cgColor
+        curveLayer.backgroundFilters = [blurFilter]
+        layer.addSublayer(curveLayer)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        curveLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        curveLayer.path = UIBezierPath.tabCurvePath(width: frame.width, height: bounds.height, direction: .right).cgPath
+        curveLayer.backgroundFilters = [CIFilter(name: "CIGaussianBlur")!]
+        curveLayer.setNeedsDisplay()
     }
 }
 
